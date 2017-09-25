@@ -4,6 +4,8 @@
   "description": "eGryzonie backend",
   "main": "app.js",
   "scripts": {
+    "start:dev": "nodemon ./bin/www",
+    "lint": "./node_modules/.bin/eslint *.js",
     "test": "test"
   },
   "repository": {
