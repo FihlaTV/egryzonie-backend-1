@@ -1,0 +1,39 @@
+{
+  "name": "egryzonie-server",
+  "version": "0.0.1",
+  "description": "eGryzonie backend",
+  "main": "app.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EnslavedEagle/egryzonie-backend.git"
+  },
+  "keywords": [
+    "egryzonie",
+    "pets",
+    "nodejs",
+    "postgresql",
+    "educational",
+    "website"
+  ],
+  "author": "Patryk Bernasiewicz, Dominika Pyssa",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/EnslavedEagle/egryzonie-backend/issues"
+  },
+  "homepage": "https://github.com/EnslavedEagle/egryzonie-backend#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "cors": "^2.8.4",
+    "express": "^4.15.5",
+    "morgan": "^1.8.2",
+    "pg": "^7.3.0",
+    "pg-hstore": "^2.3.2",
+    "sequelize": "^4.11.0"
+  },
+  "devDependencies": {
+    "eslint": "^4.7.2"
+  }
+}
