@@ -3,7 +3,8 @@ module.exports = (sequelize, DataTypes) => {
     title: DataTypes.STRING,
     gmapsposition: DataTypes.STRING,
     rodents: DataTypes.BOOLEAN,
-    websiteUrl: DataTypes.STRING
+    websiteUrl: DataTypes.STRING,
+    accepted: DataTypes.BOOLEAN
   });
 
   return Vet;
