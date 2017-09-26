@@ -3,7 +3,6 @@
         "es6": true,
         "node": true
     },
-    "extends": "eslint:recommended",
     "parserOptions": {
         "sourceType": "module"
     },
@@ -44,7 +43,6 @@
         "consistent-this": "error",
         "curly": "error",
         "default-case": "error",
-        "dot-notation": "error",
         "eol-last": [
             "error",
             "always"
@@ -211,9 +209,6 @@
             "error",
             "last"
         ],
-        "sort-imports": "error",
-        "sort-keys": "error",
-        "sort-vars": "error",
         "space-before-blocks": "error",
         "space-before-function-paren": "error",
         "space-in-parens": [

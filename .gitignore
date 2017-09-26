@@ -1,2 +1,5 @@
 # Everything under node_modules/
 node_modules/
+
+# Safe config
+server/config/

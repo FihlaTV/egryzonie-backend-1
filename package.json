@@ -4,7 +4,8 @@
   "description": "eGryzonie backend",
   "main": "app.js",
   "scripts": {
-    "start:dev": "nodemon ./bin/www",
+    "start:dev": "nodemon ./app.js",
+    "start:test": "NODE_ENV=test node8 ./app.js",
     "lint": "./node_modules/.bin/eslint *.js",
     "test": "test"
   },
@@ -30,6 +31,7 @@
     "body-parser": "^1.18.2",
     "cors": "^2.8.4",
     "express": "^4.15.5",
+    "log4js": "^2.3.4",
     "morgan": "^1.8.2",
     "pg": "^7.3.0",
     "pg-hstore": "^2.3.2",
