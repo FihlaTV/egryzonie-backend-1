@@ -4,14 +4,14 @@
         "node": true
     },
     "parserOptions": {
-        "sourceType": "module"
+        "sourceType": "module",
+        "ecmaVersion": 2017
     },
     "rules": {
         "accessor-pairs": "error",
         "array-bracket-newline": "error",
         "array-bracket-spacing": "error",
         "array-callback-return": "error",
-        "array-element-newline": "error",
         "arrow-body-style": "error",
         "arrow-parens": "error",
         "arrow-spacing": [
@@ -175,8 +175,6 @@
             "error",
             "always"
         ],
-        "object-property-newline": "error",
-        "object-shorthand": "error",
         "one-var": "off",
         "one-var-declaration-per-line": "error",
         "operator-assignment": "error",
