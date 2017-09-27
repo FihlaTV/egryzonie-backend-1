@@ -23,6 +23,13 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.BOOLEAN,
       defaultValue: false
     }
+  }, {
+    indexes: [
+      {
+        unique: true,
+        fields: ['title', 'city']
+      }
+    ]
   });
 
   return Vet;
