@@ -1,3 +1,7 @@
+# Opis
+
+Lista kodów błędów (słów kluczowych), które mają pomagać w znajdowaniu błędów w przyszłości. Niniejsze słowa kluczowe będą wyświetlać się użytkownikom, którzy będą mogli przekazać je do administracji, a tutaj będzie wyjaśnione, gdzie dokładnie szukać przyczyny.
+
 ### A
 
 - antique
