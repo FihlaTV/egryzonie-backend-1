@@ -5,6 +5,7 @@ Lista kodów błędów (słów kluczowych), które mają pomagać w znajdowaniu 
 ### A
 
 - antique
+  `server/controllers/auth.controller.js` | `create`, in `catch` clause
 - artificial
 
 ### B
