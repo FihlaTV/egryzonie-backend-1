@@ -7,15 +7,27 @@ module.exports = {
       type: Sequelize.INTEGER
     },
     title: {
+      allowNull: false,
       type: Sequelize.STRING
     },
-    gmapsposition: {
+    city: {
+      allowNull: false,
+      type: Sequelize.STRING
+    },
+    address: {
+      allowNull: false,
+      type: Sequelize.STRING
+    },
+    googleMapsID: {
       type: Sequelize.STRING
     },
     rodents: {
       type: Sequelize.BOOLEAN
     },
     websiteUrl: {
+      type: Sequelize.STRING
+    },
+    phone: {
       type: Sequelize.STRING
     },
     accepted: {
@@ -29,6 +41,13 @@ module.exports = {
       allowNull: false,
       type: Sequelize.DATE
     }
+  }, {
+    indexes: [
+      {
+        unique: true,
+        fields: ['title', 'city']
+      }
+    ]
   }),
   down: (queryInterface, Sequelize) =>
     queryInterface.dropTable('Vets')
