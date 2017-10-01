@@ -11,6 +11,7 @@ Lista kodów błędów (słów kluczowych), które mają pomagać w znajdowaniu 
 ### B
 
 - back
+  `server/policies/auth.policy.js` | `create`, in `catch` clause
 - block
 - blowgun
 

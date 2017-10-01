@@ -14,19 +14,20 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false
     }
-  });
-
-  User.beforeSave((user, options) =>
-    bcrypt.hash(user.password, 10,
-      (err, hash) => {
-        if (err) {
-          return next(err);
-        }
-        user.password = hash;
-        return next();
+  }, {
+    hooks: {
+      afterCreate: (user, options) => {
+        bcrypt.hash(user.password, null, null,
+          (err, hash) => {
+            if (err) {
+              console.error('Hashing error: ', err);
+              throw err;
+            }
+            user.password = hash;
+          });
       }
-    )
-  );
+    }
+  });
 
   return User;
 };
