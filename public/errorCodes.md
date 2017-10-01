@@ -44,6 +44,7 @@ Lista kodów błędów (słów kluczowych), które mają pomagać w znajdowaniu 
 ### J
 
 - junior
+  `server/controllers/auth.controller.js` | `login`, in `bcrypt` error
 - junk
 
 ### M

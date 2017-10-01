@@ -16,15 +16,10 @@ module.exports = (sequelize, DataTypes) => {
     }
   }, {
     hooks: {
-      afterCreate: (user, options) => {
-        bcrypt.hash(user.password, null, null,
-          (err, hash) => {
-            if (err) {
-              console.error('Hashing error: ', err);
-              throw err;
-            }
-            user.password = hash;
-          });
+      beforeCreate: (user, options) => {
+        const hash = bcrypt.hashSync(user.password, null);
+        console.log('HASH: ', hash);
+        user.password = hash;
       }
     }
   });

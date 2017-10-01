@@ -3,27 +3,12 @@ const bodyParser = require('body-parser');
 const consoleLogger = require('morgan');
 const http = require('http');
 const cors = require('cors');
-const log4js = require('log4js');
-log4js.configure({
-  appenders: {
-    general: {
-      filename: 'logs/general.log',
-      type: 'file'
-    }
-  },
-  categories: {
-    default: {
-      appenders: ['general'],
-      level: 'all'
-    }
-  }
-});
 
 const app = express();
 const env = process.env.NODE_ENV || 'development';
-const logger = log4js.getLogger('general');
-logger.level = 'ALL';
-logger.info(env);
+
+const { secret } = require('./server/config/config.json');
+app.set('secret', secret);
 
 app.use(cors());
 app.use(consoleLogger('dev'));
@@ -37,8 +22,6 @@ app.get('*', (req, res) =>
 
 const server = http.createServer(app);
 const models = require('./server/models');
-
-logger.debug(models);
 
 models.sequelize.sync({ force: true })
   .then(() => {
