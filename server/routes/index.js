@@ -1,7 +1,5 @@
-const vets = require('./vets.routes');
-const auth = require('./auth.routes');
-
-module.exports = (app) => {
-  app.use('/vets', vets);
-  app.use('/auth', auth);
+module.exports = (app, auth) => {
+  const payload = { app: app, auth: auth };
+  app.use('/auth', require('./auth.routes')(payload));
+  app.use('/vets', require('./vets.routes')(payload));
 };

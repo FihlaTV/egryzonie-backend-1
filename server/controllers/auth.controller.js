@@ -1,20 +1,7 @@
 const { User } = require('../models');
 const bcrypt = require('bcrypt-nodejs');
-const jwt = require('jsonwebtoken');
-const { secret } = require('../config/config.json');
-const guards = require('../guards');
-
-const checkPassword = (password, hash) => {
-  return new Promise((resolve, reject) => {
-    bcrypt.compare(password, hash,
-      (error, result) => {
-        if (error) {
-          reject(error);
-        }
-        resolve(result);
-      });
-  });
-};
+const jwt = require('jwt-simple');
+const { jwtSecret } = require('../config/config.json').jwt;
 
 module.exports = {
   async create (req, res) {
@@ -30,27 +17,33 @@ module.exports = {
   async login (req, res) {
     const { email, password } = req.body;
     try {
-      const user = await User.findOne({ where: { email: email } });
+      const user = await User.findOne({ email: email });
       if (!user) {
-        res.status(401).json({ message: 'Użytkownik o takim adresie e-mail nie istnieje.' });
-        return;
+        res.status(401).json({ message: 'Nie ma takiego użytkownika.' });
       }
-
-      const passwordValidation = await checkPassword(password, user.password);
-      if (!passwordValidation) {
-        res.status(401).json({ message: 'Nieprawidłowe hasło.' });
-        return;
+      const verifyPassword = await user.verifyPassword(password);
+      if (!verifyPassword) {
+        res.status(403).json({ message: 'Nieprawidłowe hasło.' });
       }
-
-      const token = jwt.sign({ user: user }, secret, { expiresIn: 60 * 60 * 24 });
-      res.json({ message: 'Pomyślnie zalogowano.', token: token });
+      const payload = { id: user.id };
+      const token = jwt.encode(payload, jwtSecret);
+      res.json({ token: token });
     } catch (error) {
-      console.error('Error during authentication (1): ', error);
-      res.status(400).json({ message: 'Wystąpił błąd podczas logowania.', errorCode: 'junior' });
+      console.log('Login Error:', error);
+      res.status(403).json({ message: 'Wystąpił błąd podczas logowania.', errorCode: '' });
     }
   },
 
-  checkLogin (req, res) {
-    return res.status(200).json({ message: 'Login correct' });
+  async user (req, res) {
+    const userId = req.user.id;
+    try {
+      const user = await User.findById(userId);
+      if (!user) {
+        res.status(401).json({ message: 'Nieprawidłowe dane logowania.' });
+      }
+      res.json(user);
+    } catch (error) {
+      res.status(400).json({ message: 'Wystąpił błąd przy próbie weryfikacji logowania.', errorCode: '' });
+    }
   }
 };

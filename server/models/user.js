@@ -13,6 +13,11 @@ module.exports = (sequelize, DataTypes) => {
     password: {
       type: DataTypes.STRING,
       allowNull: false
+    },
+    role: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      defaultValue: 'user'
     }
   }, {
     hooks: {
@@ -23,6 +28,18 @@ module.exports = (sequelize, DataTypes) => {
       }
     }
   });
+
+  User.prototype.verifyPassword = function verifyPassword (password) {
+    return new Promise((resolve, reject) => {
+      bcrypt.compare(password, this.password, (error, isMatch) => {
+        if (error) {
+          reject(error);
+        }
+
+        resolve(isMatch);
+      });
+    });
+  };
 
   return User;
 };

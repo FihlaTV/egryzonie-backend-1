@@ -16,12 +16,27 @@ module.exports = {
       }
     }
 
-    // Check for duplicate
-    const vets = await Vet.findOne({ where: { title: req.body.title, city: req.body.city } });
-    if (vets) {
-      res.status(400).json({ message: `${req.body.title} już istnieje w mieście ${req.body.city} lub ktoś już zasugerował jego dodanie.` });
+    try {
+      // Check for duplicate
+      const vets = await Vet.findOne({ where: { title: req.body.title, city: req.body.city } });
+      if (vets) {
+        res.status(400).json({ message: `${req.body.title} już istnieje w mieście ${req.body.city} lub ktoś już zasugerował jego dodanie.` });
+      }
+    } catch (getError) {
+      console.error('Get error: ', getError);
+      res.status(400).json({ error: error });
     }
 
     next();
+  },
+
+  async acceptSuggestion (req, res, next) {
+    const { vetId } = req.params;
+    try {
+      const vet = await Vet.findById(vetId);
+    } catch (vetError) {
+      console.error('Error: ', vetError);
+      res.status(400).json({ error: error });
+    }
   }
 };

@@ -3,6 +3,8 @@ const bodyParser = require('body-parser');
 const consoleLogger = require('morgan');
 const http = require('http');
 const cors = require('cors');
+const passport = require('passport');
+const auth = require('./server/auth')();
 
 const app = express();
 const env = process.env.NODE_ENV || 'development';
@@ -11,11 +13,11 @@ const { secret } = require('./server/config/config.json');
 app.set('secret', secret);
 
 app.use(cors());
-app.use(consoleLogger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(auth.initialize());
 
-require('./server/routes')(app);
+require('./server/routes')(app, auth);
 app.get('*', (req, res) =>
   res.status(200).send({ message: 'Welcome to eGryzonie API.' })
 );

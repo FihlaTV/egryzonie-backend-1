@@ -32,5 +32,10 @@ module.exports = (sequelize, DataTypes) => {
     ]
   });
 
+  Vet.associate = (models) => {
+    Vet.belongsTo(models.User, { as: 'suggestedBy' });
+    Vet.belongsTo(models.User, { as: 'acceptedBy' });
+  };
+
   return Vet;
 };
