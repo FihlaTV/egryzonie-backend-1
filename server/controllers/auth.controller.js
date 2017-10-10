@@ -27,7 +27,7 @@ module.exports = {
       }
       const payload = { id: user.id };
       const token = jwt.encode(payload, jwtSecret);
-      res.json({ token: token });
+      res.json({ token: token, user: { id: user.id, email: user.email, role: user.role } });
     } catch (error) {
       console.log('Login Error:', error);
       res.status(403).json({ message: 'Wystąpił błąd podczas logowania.', errorCode: '' });
@@ -37,7 +37,7 @@ module.exports = {
   async user (req, res) {
     const userId = req.user.id;
     try {
-      const user = await User.findById(userId);
+      const user = await User.findOne({ where: { id: userId }, attributes: ['id', 'email', 'role'] });
       if (!user) {
         res.status(401).json({ message: 'Nieprawidłowe dane logowania.' });
       }

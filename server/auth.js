@@ -18,7 +18,7 @@ module.exports = () => {
         return done(new Error('Nie ma takiego użytkownika.'));
       }
 
-      return done(null, { id: user.id });
+      return done(null, { id: user.id, role: user.role });
     } catch (error) {
       console.error('Authentication error:', error);
       return done(error, null);

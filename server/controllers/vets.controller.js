@@ -23,6 +23,24 @@ module.exports = {
     }
   },
 
+  async search (req, res) {
+    const { places } = req.body;
+    console.log(places, '\n\n\n');
+    if (!places) {
+      res.json([]);
+    }
+
+    try {
+      const vets = await Vet.findAll({
+        where: { 'title': { in: places } },
+        limit: 10
+      });
+      res.status(203).json(vets);
+    } catch (error) {
+      res.status(400).json({ message: 'Wystąpił błąd podczas wyszukiwania pobliskich weterynarzy.', errorCode: '' });
+    }
+  },
+
   async acceptSuggestion (req, res) {
     const { vetId } = req.body;
     try {
