@@ -8,7 +8,8 @@ module.exports = (payload) => {
   router.get('/', vetsController.index);
   router.post('/suggest', vetsPolicy.suggest, vetsController.suggest);
   router.put('/accept_suggestion/:vetId', vetsPolicy.acceptSuggestion, vetsController.acceptSuggestion);
-  router.post('/search', vetsController.search);
+  router.post('/search_names', vetsController.searchByTitle);
+  router.post('/search_city', vetsController.searchByCity);
 
   return router;
 };

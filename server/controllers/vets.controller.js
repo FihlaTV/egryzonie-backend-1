@@ -23,9 +23,25 @@ module.exports = {
     }
   },
 
-  async search (req, res) {
+  async searchByCity (req, res) {
+    const { city } = req.body;
+    if (!city) {
+      res.json([]);
+    }
+
+    try {
+      const vets = await Vet.findAll({
+        where: { 'city': city },
+        limit: 10
+      });
+      res.status(203).json(vets);
+    } catch (error) {
+      res.status(400).json({ message: `Wystąpił błąd podczas wyszukiwania weterynarzy z miasta ${city}.`, errorCode: '' });
+    }
+  },
+
+  async searchByTitle (req, res) {
     const { places } = req.body;
-    console.log(places, '\n\n\n');
     if (!places) {
       res.json([]);
     }

@@ -6,6 +6,7 @@
   "scripts": {
     "start:dev": "nodemon ./app.js",
     "start:test": "NODE_ENV=test node8 ./app.js",
+    "seed": "sequelize db:seed:all",
     "lint": "./node_modules/.bin/eslint *.js",
     "test": "test"
   },
