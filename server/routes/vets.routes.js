@@ -6,6 +6,7 @@ const auth = require('../auth');
 
 module.exports = (payload) => {
   router.get('/', vetsController.index);
+  router.get('/view/:vetId', vetsController.view);
   router.post('/suggest', vetsPolicy.suggest, vetsController.suggest);
   router.put('/accept_suggestion/:vetId', vetsPolicy.acceptSuggestion, vetsController.acceptSuggestion);
   router.post('/search_names', vetsController.searchByTitle);
