@@ -1,9 +1,17 @@
 const express = require('express');
-const router = express.Router();
+const router = new express.Router();
 const vetsController = require('../controllers/vets.controller');
 const vetsPolicy = require('../policies/vets.policy');
+const auth = require('../auth');
 
-router.get('/', vetsController.index);
-router.post('/suggest', vetsPolicy.suggest, vetsController.suggest);
+module.exports = (payload) => {
+  router.get('/', vetsController.index);
+  router.get('/view/:vetId', vetsController.view);
+  router.post('/suggest', vetsPolicy.suggest, vetsController.suggest);
+  router.put('/accept_suggestion/:vetId', vetsPolicy.acceptSuggestion, vetsController.acceptSuggestion);
+  router.post('/search_names', vetsController.searchByTitle);
+  router.post('/search_city', vetsController.searchByCity);
+  router.get('/search_within_range/:range/:lat/:lng', vetsController.searchWithinRange);
 
-module.exports = router;
+  return router;
+};

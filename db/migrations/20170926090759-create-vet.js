@@ -24,6 +24,9 @@ module.exports = {
     rodents: {
       type: Sequelize.BOOLEAN
     },
+    position: {
+      type: Sequelize.GEOMETRY
+    },
     websiteUrl: {
       type: Sequelize.STRING
     },

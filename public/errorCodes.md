@@ -5,11 +5,13 @@ Lista kodów błędów (słów kluczowych), które mają pomagać w znajdowaniu 
 ### A
 
 - antique
+  `server/controllers/auth.controller.js` | `create`, in `catch` clause
 - artificial
 
 ### B
 
 - back
+  `server/policies/auth.policy.js` | `create`, in `catch` clause
 - block
 - blowgun
 
@@ -42,6 +44,7 @@ Lista kodów błędów (słów kluczowych), które mają pomagać w znajdowaniu 
 ### J
 
 - junior
+  `server/controllers/auth.controller.js` | `login`, in `bcrypt` error
 - junk
 
 ### M
