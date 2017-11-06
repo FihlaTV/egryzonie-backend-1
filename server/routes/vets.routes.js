@@ -11,6 +11,7 @@ module.exports = (payload) => {
   router.put('/accept_suggestion/:vetId', vetsPolicy.acceptSuggestion, vetsController.acceptSuggestion);
   router.post('/search_names', vetsController.searchByTitle);
   router.post('/search_city', vetsController.searchByCity);
+  router.get('/search_within_range/:range/:lat/:lng', vetsController.searchWithinRange);
 
   return router;
 };

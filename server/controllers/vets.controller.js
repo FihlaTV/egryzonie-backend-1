@@ -14,6 +14,16 @@ module.exports = {
     }
   },
 
+  async searchWithinRange (req, res) {
+    const { range, lat, lng } = req.params || 50000;
+    try {
+      const vets = await Vet.findWithinRange(Number(range), lat, lng);
+      res.json(vets);
+    } catch (error) {
+      console.error(`Error: ${error}`);
+    }
+  },
+
   // Public - lista weterynarzy w wybranym mieście
   async searchByCity (req, res) {
     const { city } = req.body;

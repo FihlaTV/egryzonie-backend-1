@@ -4,8 +4,7 @@
   "description": "eGryzonie backend",
   "main": "app.js",
   "scripts": {
-    "start:dev": "nodemon ./app.js",
-    "start:test": "NODE_ENV=test node8 ./app.js",
+    "start": "nodemon ./app.js",
     "seed": "./node_modules/.bin/sequelize db:seed:all",
     "lint": "./node_modules/.bin/eslint *.js",
     "test": "test"
@@ -48,6 +47,7 @@
     "sequelize": "^4.11.0"
   },
   "devDependencies": {
+    "@types/googlemaps": "^3.29.2",
     "eslint": "^4.7.2"
   }
 }
