@@ -28,8 +28,6 @@ app.get('*', (req, res) =>
 const server = http.createServer(app);
 const models = require('./server/models');
 
-// Just a test
-
 models.sequelize.sync({ force: true })
   .then(() => {
     if (env === 'development') {
