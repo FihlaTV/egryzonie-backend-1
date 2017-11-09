@@ -17,7 +17,8 @@ module.exports = {
   async searchWithinRange (req, res) {
     const { range, lat, lng } = req.params || 50000;
     try {
-      const vets = await Vet.findWithinRange(Number(range), lat, lng);
+      const attributes = ['id', 'title', 'address', 'googleMapsID', 'position'];
+      const vets = await Vet.findWithinRange(Number(range), lat, lng, attributes);
       res.json(vets);
     } catch (error) {
       console.error(`Error: ${error}`);
@@ -32,7 +33,8 @@ module.exports = {
     }
     try {
       const vets = await Vet.findAll({
-        where: { 'city': city },
+        attributes: ['id', 'title', 'address', 'googleMapsID', 'position'],
+        where: { 'city': city, 'accepted': true },
         limit: 10
       });
       res.status(203).json(vets);
@@ -49,7 +51,8 @@ module.exports = {
     }
     try {
       const vets = await Vet.findAll({
-        where: { 'title': { in: places } },
+        attributes: ['id', 'title', 'address', 'googleMapsID', 'position'],
+        where: { 'title': { in: places }, 'accepted': true },
         limit: 10
       });
       res.status(203).json(vets);

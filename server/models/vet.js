@@ -38,9 +38,9 @@ module.exports = (sequelize, DataTypes) => {
     Vet.belongsTo(models.User, { as: 'acceptedBy' });
   };
 
-  Vet.findWithinRange = (range, lat, lng) => {
+  Vet.findWithinRange = (range, lat, lng, customAttributes = null) => {
     return new Promise((resolve, reject) => {
-      const attributes = Object.keys(Vet.attributes);
+      const attributes = customAttributes || Object.keys(Vet.attributes);
       const distanceAttribute = sequelize.fn(
         'ST_Distance_Sphere',
         sequelize.literal('position'),
