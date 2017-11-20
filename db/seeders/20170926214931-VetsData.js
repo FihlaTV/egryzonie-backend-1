@@ -3,7 +3,6 @@ module.exports = {
     queryInterface.bulkInsert('Vets', [
       {
         title: 'Centrum Zdrowia Małych Zwierząt',
-        city: 'Poznań',
         address: 'Osiedle Władysława Jagiełły 33, 60-694 Poznań, Polska',
         googleMapsID: 'ChIJQ8EgpGpDBEcR1d0wYZTGPbI',
         position: Sequelize.fn('ST_GeomFromText', 'POINT(52.458415 16.904740)'),
@@ -16,7 +15,6 @@ module.exports = {
       },
       {
         title: 'Uniwersyteckie Centrum Medycyny Weterynaryjnej w Poznaniu',
-        city: 'Poznań',
         address: 'Wierzbięcice 65, 60-101 Poznań',
         googleMapsID: 'ChIJQRgfL69EBEcRmXoCfgeg6Ho',
         rodents: true,
@@ -29,7 +27,6 @@ module.exports = {
       },
       {
         title: 'Gabinet weterynaryjny lek. wet Dariusz Filipiński',
-        city: 'Poznań',
         address: 'osiedle Wichrowe Wzgórze 103, 61-699 Poznań',
         googleMapsID: 'ChIJ96PTO65cBEcRaIKdka7JQC8',
         rodents: true,
@@ -42,7 +39,6 @@ module.exports = {
       },
       {
         title: 'Centrum Zdrowia Małych Zwierząt',
-        city: 'Wronki',
         address: 'Poznańska 63A, Wronki',
         googleMapsID: 'ChIJ_RRLtDUcBEcREip9_VldDA4',
         rodents: true,

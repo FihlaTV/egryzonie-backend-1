@@ -1,4 +1,5 @@
 const { Vet } = require('../models');
+const positionHelper = require('../helpers/position.helper');
 
 module.exports = {
   // Public - lista weterynarzy
@@ -25,42 +26,6 @@ module.exports = {
     }
   },
 
-  // Public - lista weterynarzy w wybranym mieście
-  async searchByCity (req, res) {
-    const { city } = req.body;
-    if (!city) {
-      res.json([]);
-    }
-    try {
-      const vets = await Vet.findAll({
-        attributes: ['id', 'title', 'address', 'googleMapsID', 'position'],
-        where: { 'city': city, 'accepted': true },
-        limit: 10
-      });
-      res.status(203).json(vets);
-    } catch (error) {
-      res.status(400).json({ message: `Wystąpił błąd podczas wyszukiwania weterynarzy z miasta ${city}.`, errorCode: '' });
-    }
-  },
-
-  // Public - lista po nazwie
-  async searchByTitle (req, res) {
-    const { places } = req.body;
-    if (!places) {
-      res.json([]);
-    }
-    try {
-      const vets = await Vet.findAll({
-        attributes: ['id', 'title', 'address', 'googleMapsID', 'position'],
-        where: { 'title': { in: places }, 'accepted': true },
-        limit: 10
-      });
-      res.status(203).json(vets);
-    } catch (error) {
-      res.status(400).json({ message: 'Wystąpił błąd podczas wyszukiwania pobliskich weterynarzy.', errorCode: '' });
-    }
-  },
-
   // Public - szczegóły weterynarza
   async view (req, res) {
     const { vetId } = req.params;
@@ -75,15 +40,19 @@ module.exports = {
       }
       res.status(200).json(vet);
     } catch (error) {
-      res.statjs(400).json({ message: 'Wystąpił błąd podczas pobierania informacji o weterynarzu.', errorCode: '' });
+      res.status(400).json({ message: 'Wystąpił błąd podczas pobierania informacji o weterynarzu.', errorCode: '' });
     }
   },
 
   // User - zasugeruj nowego weterynarza
   async suggest (req, res) {
+    const { vet, lat, lng } = req.body;
+
+    req.body.position = positionHelper(lat, lng);
+
     try {
-      const vet = await Vet.create(req.body);
-      res.status(203).json(vet);
+      const newVet = await Vet.create(req.body);
+      res.status(203).json(newVet);
     } catch (error) {
       res.status(400).json({ message: 'Wystąpił błąd podczas tworzenia sugestii weterynarza.', errorCode: 'empirical' });
     }

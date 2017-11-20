@@ -2,11 +2,12 @@ const { Vet } = require('../models');
 
 module.exports = {
   async suggest (req, res, next) {
+
     // Check if required fields are present
-    const requiredFields = ['title', 'city', 'address'];
+    const requiredFields = ['title', 'address', 'googleMapsID', 'lat', 'lng'];
     requiredFields.forEach((item) => {
       if (!req.body[item]) {
-        res.status(400).json({ message: 'Nazwa, miasto oraz adres są wymagane.' });
+        res.status(400).json({ message: 'Nazwa, adres, google ID oraz pozycja są wymagane.' });
       }
     });
 
@@ -18,9 +19,9 @@ module.exports = {
 
     try {
       // Check for duplicate
-      const vets = await Vet.findOne({ where: { title: req.body.title, city: req.body.city } });
+      const vets = await Vet.findOne({ where: { title: req.body.title } });
       if (vets) {
-        res.status(400).json({ message: `${req.body.title} już istnieje w mieście ${req.body.city} lub ktoś już zasugerował jego dodanie.` });
+        res.status(400).json({ message: `${req.body.title} już istnieje lub ktoś już zasugerował jego dodanie.` });
       }
     } catch (getError) {
       console.error('Get error: ', getError);

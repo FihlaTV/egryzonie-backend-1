@@ -4,10 +4,6 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING(60),
       allowNull: false
     },
-    city: {
-      type: DataTypes.STRING(20),
-      allowNull: false
-    },
     address: {
       type: DataTypes.STRING(80),
       allowNull: false
@@ -28,7 +24,7 @@ module.exports = (sequelize, DataTypes) => {
     indexes: [
       {
         unique: true,
-        fields: ['title', 'city']
+        fields: ['googleMapsID']
       }
     ]
   });
